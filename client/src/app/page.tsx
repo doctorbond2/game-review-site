@@ -1,7 +1,5 @@
-export default function () {
-  return (
-    <>
-      <div>asd</div>
-    </>
-  );
+import ProductForm from '@/components/ProductForm';
+
+export default function Home() {
+  return <></>;
 }
