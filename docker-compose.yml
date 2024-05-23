@@ -15,21 +15,21 @@ services:
     environment:
       - PORT=3000
       - MONGODB_URI = mongodb://mongodb:27017
-    develop:
-      watch:
-        - path: ./src
-          target: /usr/src/app
-          action: sync
+    # develop:
+    #   watch:
+    #     - path: ./src
+    #       target: /usr/src/app
+    #       action: sync
 
   client:
     image: nextshop_frontend
     ports:
       - 8081:8080
-    develop:
-      watch:
-        - path: ./src
-          target: /usr/src/app
-          action: sync
+    # develop:
+    #   watch:
+    #     - path: ./src
+    #       target: /usr/src/app
+    #       action: sync
 volumes:
   nextshop_volume:
     external: true
