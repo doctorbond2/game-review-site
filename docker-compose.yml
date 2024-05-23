@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mongo:latest
+    ports:
+      - '27018:27017'
+    volumes:
+      - nextshop_volume:/nextshop_data
+
+  server:
+    image: nextshop_backend
+    depends_on:
+      - db
+    ports:
+      - 3001:3000
+    environment:
+      - PORT=3000
+      - MONGODB_URI = mongodb://mongodb:27017
+    develop:
+      watch:
+        - path: ./src
+          target: /usr/src/app
+          action: sync
+
+  client:
+    image: nextshop_frontend
+    ports:
+      - 8081:8080
+    develop:
+      watch:
+        - path: ./src
+          target: /usr/src/app
+          action: sync
+volumes:
+  nextshop_volume:
+    external: true

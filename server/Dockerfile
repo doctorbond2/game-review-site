@@ -1,12 +1,16 @@
 FROM node:lts-alpine
 
-WORKDIR /server
+WORKDIR /usr/src/app
 
 COPY . .
 
 RUN npm i
 
-CMD ["npm run start"]
+RUN npm install -g nodemon
+
+EXPOSE 3000
+
+CMD ["node", "src/index.js"]
 
 
 
