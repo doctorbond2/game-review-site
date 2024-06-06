@@ -1,6 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 
-type Props = { submitProduct: () => void };
+type Props = { submitProduct: (data: any) => void };
 
 const ProductForm = ({ submitProduct }: Props) => {
   return (
