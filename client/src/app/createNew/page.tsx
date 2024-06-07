@@ -1,8 +1,9 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductForm from '@/components/ProductForm';
 import axios from 'axios';
 export default function CreateProduct() {
+  const [data, setData] = useState();
   const submitProduct = async (data: any) => {
     if (!data) {
       return;
@@ -21,8 +22,8 @@ export default function CreateProduct() {
     try {
       const response = await axios.get('http://127.0.0.1:5000/test');
       if (response.data) {
-        alert('bra');
         console.log(response.data);
+        setData(response.data);
       }
     } catch (err: any) {
       console.log(err.message);
