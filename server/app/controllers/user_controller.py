@@ -1,5 +1,5 @@
-from flask import Blueprint, request, jsonify
-from ..models.user_model import User
+from flask import request, jsonify
+from ..models.user import User
 from .. import db
 
 
@@ -11,7 +11,7 @@ def add_user():
     
     if not username or not email:
         return jsonify({'error': 'Please provide username and email'}), 400
-    new_user = Users(username=username, email=email)
+    new_user = User(username=username, email=email)
     try:
         db.session.add(new_user)
         db.session.commit()

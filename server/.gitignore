@@ -1,2 +1,22 @@
-/.venv/
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+__pycache__
+*.py[cod]
+**/.pyc
+# Flask specific files
+instance/
+.webassets-cache
+
+# Environments
 .env
+.venv/
+env/
+venv/
+.routesenv
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+
+# MacOS specific files
+.DS_Store
