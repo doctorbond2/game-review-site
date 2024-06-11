@@ -8,8 +8,8 @@ class Game(db.Model):
     release_year = db.Column(db.Integer, nullable=False)
     publisher = db.Column(db.String(80), default='unknown')
     studio = db.Column(db.String(80), default=publisher)
+    systems = db.Column(db.String(80), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     
 
-    
