@@ -16,3 +16,4 @@ def create_app():
     app.register_blueprint(blueprints.game_bp)
     db.__init__(app)
     return app
+
