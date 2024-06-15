@@ -1,9 +1,5 @@
 from flask import Flask, redirect, request, jsonify
-from app import create_app
-app = create_app()
-
-
-
+from app import app
 
 @app.route("/")
 def hello_world():

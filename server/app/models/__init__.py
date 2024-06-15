@@ -1,2 +1,1 @@
-from .game import Game
-from .user import User
+from app.models import game, system

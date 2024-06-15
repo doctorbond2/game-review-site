@@ -1,7 +1,13 @@
-from app.db import db
-
+from app import db
+import sqlalchemy as sa
+from typing import Optional
+import sqlalchemy.orm as so
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True)
+    email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True)
+    password: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
+
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
