@@ -14,6 +14,6 @@ class System(db.Model):
         sa.DateTime(timezone=True), default=sa.func.now())
     updated_at: so.Mapped[Optional[datetime]] = so.mapped_column(
         sa.DateTime(timezone=True), default=sa.func.now(), onupdate=sa.func.now())
-    games: so.Mapped['Game'] = so.relationship('Game', secondary='game_system', back_populates='systems') # type: ignore
+    games: so.WriteOnlyMapped['Game'] = so.relationship('Game', secondary='game_system', back_populates='systems') # type: ignore
     def __repr__(self):
         return '<System {}>'.format(self.name)
