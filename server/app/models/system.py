@@ -8,7 +8,7 @@ class System(db.Model):
     __tablename__ = 'systems'
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     name: so.Mapped[str] = so.mapped_column(sa.String(80), unique=True, nullable=False)
-    manufacturer: so.Mapped[str] = so.mapped_column(sa.String(80), nullable=False)
+    manufacturer: so.WriteOnlyMapped[str] = so.relationship('Manufacturer', back_populates='systems') # type: ignore
     release_year: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     created_at: so.Mapped[Optional[datetime]] = so.mapped_column(
         sa.DateTime(timezone=True), default=sa.func.now())

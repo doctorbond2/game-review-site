@@ -18,7 +18,7 @@ def create_sample_data():
         'Puzzle': genre.Genre(name='Puzzle'),
     }
     sample_systems = {
-        'NES': system.System(name='NES'),
+        'NES': system.System(name='NES',),
         'SNES': system.System(name='SNES'),
         'N64': system.System(name='N64'),
         'GameCube': system.System(name='GameCube'),
