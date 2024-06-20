@@ -1,6 +1,6 @@
 from app import db, app
 from app.models import game, system, user, genre, publisher, association_tables
-
+from sqlalchemy import select
 def create_sample_data():
     print("Creating sample data")
     # Create sample data
@@ -17,48 +17,49 @@ def create_sample_data():
         'Sports': genre.Genre(name='Sports'),
         'Puzzle': genre.Genre(name='Puzzle'),
     }
-    sample_systems = {
+    nintento_systems = {
         'NES': system.System(name='NES',),
-        'SNES': system.System(name='SNES'),
-        'N64': system.System(name='N64'),
-        'GameCube': system.System(name='GameCube'),
-        'Wii': system.System(name='Wii'),
-        'Wii U': system.System(name='Wii U'),
-        'Switch': system.System(name='Switch'),
+    }
+    sony_systems = {
+        'PlayStation': system.System(name='PlayStation'),
+        'PlayStation 2': system.System(name='PlayStation 2'),
+        'PlayStation 3': system.System(name='PlayStation 3'),
+        'PlayStation 4': system.System(name='PlayStation 4'),
+    }
+    sample_systems = {
+        'NES': system.System(name='NES', release_year=1983),
     }
     sample_publishers = {
-        'Nintendo': publisher.Publisher(name='Nintendo', founded=1889),
-        'Square Enix': publisher.Publisher(name='Square Enix', founded=1986),
-        'Konami': publisher.Publisher(name='Konami', founded=1969),
-        'Capcom': publisher.Publisher(name='Capcom', founded=1979),
-        'Sega': publisher.Publisher(name='Sega', founded=1960),
-        'Sony': publisher.Publisher(name='Sony', founded=1946),
-        'Microsoft': publisher.Publisher(name='Microsoft', founded=1975),
+        'Nintendo': publisher.Publisher(
+            name='Nintendo', 
+            founded=1889,
+            systems=list(nintento_systems.values())),
     }
-
-    # Create sample games using the dictionaries
+    sample_systems_with_publisher = {
+    'NES': system.System(name='NES', release_year=1983, manufacturer=sample_publishers['Nintendo']),
+}
     sample_games = [
-    game.Game(title='Super Mario Bros.', 
-              release_year=1985, 
-              genre=[sample_genres['Adventure'], sample_genres['Action']],
-              systems=[sample_systems['NES']],
-              publisher=[sample_publishers['Nintendo']]),
-    game.Game(title='The Legend of Zelda', 
-              release_year=1986, 
-              genre=[sample_genres['Adventure'], sample_genres['Action']],
-              systems=[sample_systems['NES']],
-              publisher=[sample_publishers['Nintendo']]),
-    game.Game(title='Final Fantasy', 
-              release_year=1987, 
-              genre=[sample_genres['RPG'], sample_genres['Adventure']],
-              systems=[sample_systems['NES']],
-              publisher=[sample_publishers['Square Enix']]),
-]
-
+        game.Game(title='Super Mario Bros.', 
+                  release_year=1985, 
+                  genre=[sample_genres['Adventure'], sample_genres['Action']],
+                  systems=[sample_systems_with_publisher['NES']],
+                  publisher=[sample_publishers['Nintendo']]),
+        game.Game(title='The Legend of Zelda', 
+                  release_year=1986, 
+                  genre=[sample_genres['Adventure'], sample_genres['Action']],
+                  systems=[sample_systems_with_publisher['NES']],
+                  publisher=[sample_publishers['Nintendo']]),
+        game.Game(title='Final Fantasy', 
+                  release_year=1987, 
+                  genre=[sample_genres['RPG'], sample_genres['Adventure']],
+                  systems=[sample_systems_with_publisher['NES']],
+                  publisher=[sample_publishers['Square Enix']]),
+    ]
+    session = db.session()
     # Add all sample data to the session and commit
-    db.session.add_all(
+    session.add_all(
         list(sample_genres.values()) 
-        + list(sample_systems.values()) 
+        + list(sample_systems_with_publisher.values()) 
         + list(sample_publishers.values())
         + sample_games)
-    db.session.commit()
+    session.commit()
