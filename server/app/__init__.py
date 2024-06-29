@@ -20,6 +20,9 @@ CORS(app)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-# app.register_blueprint(blueprints.game_bp)
+
 from app.routes import blueprints
+
+app.register_blueprint(blueprints.game_bp)
+
 from app import routes, models, controllers, factory

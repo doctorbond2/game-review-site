@@ -3,6 +3,7 @@ import sqlalchemy as sa
 from typing import Optional, List
 import sqlalchemy.orm as so
 from datetime import datetime, timezone
+from .association_tables import game_system_association as gsa
 
 class System(db.Model):
     __tablename__ = 'systems'
@@ -15,6 +16,19 @@ class System(db.Model):
         sa.DateTime(timezone=True), default=sa.func.now())
     updated_at: so.Mapped[Optional[datetime]] = so.mapped_column(
         sa.DateTime(timezone=True), default=sa.func.now(), onupdate=sa.func.now())
-    games: so.WriteOnlyMapped['Game'] = so.relationship('Game', secondary='game_system', back_populates='systems') # type: ignore
+    games: so.WriteOnlyMapped['Game'] = so.relationship( # type: ignore
+        'Game', 
+        secondary=gsa,
+        back_populates='systems')
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'manufacturer': self.manufacturer.name if self.manufacturer else None,
+            'publisher_id': self.publisher_id,
+            'release_year': self.release_year,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
+        }
     def __repr__(self):
         return '<System {}>'.format(self.name)
