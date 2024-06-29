@@ -29,8 +29,30 @@ class Game(db.Model):
     __table_args__ = (
         CheckConstraint('release_year >= 1940 AND release_year <= 2024', name='release_year_check'),
         )
- 
-    def to_dict_with_systems(self):
+    
+    def to_dict(self, session):
+        from .publisher import Publisher
+        from .genre import Genre
+        from .system import System
+        systems = session.scalars(sa.select(System).join(gsa).filter(gsa.c.game_id == self.id)).all()
+        genres = session.scalars(sa.select(Genre).join(gga).filter(gga.c.game_id == self.id)).all()
+        publishers = session.scalars(sa.select(Publisher).join(gpa).filter(gpa.c.game_id == self.id)).all()
+        return {
+            'id': self.id,
+            'title': self.title,
+            'release_year': self.release_year,
+            'pc': self.pc,
+            'mac': self.mac,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+            'image_url': self.image_url,
+            'systems': [system.name for system in systems],
+            'genres': [genre.name for genre in genres],
+            'publishers': [publisher.name for publisher in publishers]
+        }
+    def to_dict_with_genres(self,session):
+        from .genre import Genre
+        genres = session.scalars(sa.select(Genre).join(gga).filter(gga.c.game_id == self.id)).all()
         return {
             'id': self.id,
             'title': self.title,

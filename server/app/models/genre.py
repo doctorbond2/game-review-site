@@ -14,12 +14,15 @@ class Genre(db.Model):
         sa.DateTime(timezone=True), default=sa.func.now())
     games: so.WriteOnlyMapped['Game'] = so.relationship('Game', # type: ignore
         secondary=gga, back_populates='genre')
-    def to_dict(self):
+    def to_dict_with_games(self, session):
+        from .game import Game
+        games = session.scalars(sa.select(Game).join(gga).filter(gga.c.genre_id == self.id)).all()
         return {
             'id': self.id,
             'name': self.name,
             'created_at': self.created_at.isoformat() if self.created_at else None,
-            'updated_at': self.updated_at.isoformat() if self.updated_at else None
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+            'games': [{'title': game.title, 'release_year': game.release_year} for game in games]
         }
     def __repr__(self):
         return '<Genre {}>'.format(self.name)
