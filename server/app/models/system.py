@@ -20,15 +20,28 @@ class System(db.Model):
         'Game', 
         secondary=gsa,
         back_populates='systems')
-    def to_dict(self):
+    def to_dict_with_details(self,session):
+        from .publisher import Publisher
+        from .game import Game
+        manufacturer = session.scalar(
+            sa.select(Publisher).where(Publisher.id == self.publisher_id))
+        games = session.scalars(
+            sa.select(Game).join(gsa).filter(gsa.c.game_id == self.id)).all()
         return {
             'id': self.id,
             'name': self.name,
-            'manufacturer': self.manufacturer.name if self.manufacturer else None,
+            'manufacturer': manufacturer.name if self.manufacturer else None,
             'publisher_id': self.publisher_id,
             'release_year': self.release_year,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
+        }
+    def to_dict_with_games(self):
+        from .game import Game
+        return {
+            'id': self.id,
+            'name': self.name,
+            'games': [game.to_dict() for game in self.games]
         }
     def __repr__(self):
         return '<System {}>'.format(self.name)
