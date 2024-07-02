@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-CORS(app)
+
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -16,5 +16,5 @@ migrate = Migrate(app, db)
 from app.routes import blueprints
 
 app.register_blueprint(blueprints.game_bp)
-
+CORS(app)
 from app import routes, models, controllers, factory
