@@ -26,13 +26,14 @@ const useFetch = <T>(url: string, tier: number): Props<T> => {
   const [data, setData] = React.useState<T | null>(null);
   const [error, setError] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
-  console.log(process.env.GAMES_GET_ALL);
+  console.log(process.env.NEXT_PUBLIC_GAMES_GET_ALL);
   useEffect(() => {
     const fetchData = async () => {
       console.log(url);
       try {
         const res = await a.get(url);
         setData(res.data);
+        console.log(res.data);
       } catch (e: any) {
         setError(e.message);
       } finally {

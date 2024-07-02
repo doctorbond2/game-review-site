@@ -14,18 +14,18 @@ function GameList({}: Props) {
   return (
     <>
       <h2>Game list</h2>
-      {data ? (
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : error ? (
+        <h2>Error: {error}</h2>
+      ) : data && Array.isArray(data) && data.length > 0 ? (
         <ul id="home-game-list">
           {data.map((item: any, index) => (
-            <>{item.title}</>
+            <li key={index}>{item.title}</li>
           ))}
         </ul>
-      ) : loading ? (
-        <h2>{loading.toString()}</h2>
-      ) : error ? (
-        <h2>{error.toString()}</h2>
       ) : (
-        <h2>No data</h2>
+        <h2>No data available</h2>
       )}
     </>
   );
