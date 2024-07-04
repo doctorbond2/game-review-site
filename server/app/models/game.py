@@ -62,6 +62,7 @@ class Game(db.Model):
             'title': self.title,
             'release_year': self.release_year,
             'image_url': self.image_url,
+            'genres': [genre.name for genre in genres],
         }
     def to_dict_with_genres(self,session):
         from .genre import Genre

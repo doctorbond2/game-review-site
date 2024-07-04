@@ -6,10 +6,12 @@ type Props = {
 };
 
 function GameCard({ game }: Props) {
+  console.log(game);
   return (
     <>
       <Box sx={box_basic_props}>
         <h2>{game.title}</h2>
+        <h3>{game.genres}</h3>
       </Box>
     </>
   );
