@@ -2,6 +2,7 @@
 import React from 'react';
 import useFetch from '@/hooks/useFetch';
 import endpoints from '@/classes/endpoints';
+import GameCard from '../cards/game/GameCard';
 type Props = {};
 
 function GameList({}: Props) {
@@ -20,8 +21,10 @@ function GameList({}: Props) {
         <h2>Error: {error}</h2>
       ) : data && Array.isArray(data) && data.length > 0 ? (
         <ul id="home-game-list">
-          {data.map((item: any, index) => (
-            <li key={index}>{item.title}</li>
+          {data.map((game: any, index) => (
+            <li key={index}>
+              <GameCard game={game} />
+            </li>
           ))}
         </ul>
       ) : (
