@@ -1,9 +1,10 @@
 import React from 'react';
 import { clientInstance as a } from '@/classes/axiosInstance';
+import Image from 'next/image';
 import api from '@/classes/api';
 import endpoints from '@/classes/endpoints';
 import { AxiosResponse } from 'axios';
-
+import { Card, Box } from '@mui/material';
 const getData = async (id: string): Promise<AxiosResponse<any[]>> => {
   const res = await api.get(endpoints.getOneGame + id);
 
@@ -20,17 +21,20 @@ type Props = {
 async function Game({ params }: Props) {
   try {
     const res: any = await getData(params.gameId);
-    const { data } = res;
+    const { data: game } = res;
     return (
       <>
-        <h2>{data.title}</h2>
+        <Box>
+          <Card>
+            <Image src={game.image} alt={game.title} />
+            <h2>{game.title}</h2>
+          </Card>
+        </Box>
       </>
     );
   } catch (error) {
     return <div>No game found</div>;
   }
-
-  return <div>page</div>;
 }
 
 export default Game;
