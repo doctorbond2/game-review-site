@@ -4,6 +4,8 @@ export const metadata = {
 };
 import SubmitProvider from '../context/SubmitContext';
 import './globals.css';
+import Footer from '@/components/nav/footer/Footer';
+import Header from '@/components/nav/header/Header';
 export default function RootLayout({
   children,
 }: {
@@ -12,7 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <SubmitProvider>
-        <body>{children}</body>
+        <body style={{ backgroundColor: 'black' }}>
+          <Header />
+          {children}
+          <Footer />
+        </body>
       </SubmitProvider>
     </html>
   );
