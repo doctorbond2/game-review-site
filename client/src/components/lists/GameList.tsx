@@ -14,7 +14,7 @@ function GameList({}: Props) {
 
   return (
     <>
-      <h2>Game list</h2>
+      {/* <h2>Game list</h2> */}
       {loading ? (
         <h2>Loading...</h2>
       ) : error ? (

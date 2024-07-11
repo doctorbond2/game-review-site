@@ -59,6 +59,7 @@ class Game(db.Model):
         genres = session.scalars(sa.select(Genre).join(gga).filter(gga.c.game_id == self.id)).all()
         publishers = session.scalars(sa.select(Publisher).join(gpa).filter(gpa.c.game_id == self.id)).all()
         return {
+            'id': self.id,
             'title': self.title,
             'release_year': self.release_year,
             'image_url': self.image_url,

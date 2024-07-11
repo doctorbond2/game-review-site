@@ -25,7 +25,8 @@ async function Games({}: Props) {
         {res.data.map((game: any, index: number) => (
           <>
             <div key={index}></div>
-            <h2>{game.title}</h2>
+
+            <h2 style={{ color: 'white' }}>{game.title}</h2>
           </>
         ))}
       </>
@@ -34,8 +35,7 @@ async function Games({}: Props) {
     console.error(error);
     return (
       <>
-        <div>Error fetching data</div>
-        <Button>Back to homepage</Button>
+        <h3 style={{ color: 'white' }}>Error fetching data</h3>
       </>
     );
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { clientInstance as a } from '@/classes/axiosInstance';
 import api from '@/classes/api';
 import endpoints from '@/classes/endpoints';
+import { Box } from '@mui/material';
 import { AxiosResponse } from 'axios';
 
 const getData = async (id: string): Promise<AxiosResponse<any[]>> => {
@@ -23,7 +24,9 @@ async function Game({ params }: Props) {
     const { data } = res;
     return (
       <>
-        <h2>{data.title}</h2>
+        <Box>
+          <h2 style={{ color: 'white' }}>{data.title}</h2>
+        </Box>
       </>
     );
   } catch (error) {

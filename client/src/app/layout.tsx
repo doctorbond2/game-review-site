@@ -14,8 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <SubmitProvider>
-        <body style={{ backgroundColor: 'black' }}>
+        <body style={{ backgroundColor: 'black', paddingTop: '50px  ' }}>
           <Header />
+
           {children}
           <Footer />
         </body>
