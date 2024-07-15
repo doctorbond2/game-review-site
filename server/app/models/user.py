@@ -8,8 +8,8 @@ class User(db.Model):
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, nullable=False)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,nullable=False)
     password_hash: so.Mapped[str] = so.mapped_column(sa.String(256))
-    ratings: so.WriteOnlyMapped['Rating'] = so.relationship( # type: ignore
-        'Rating', back_populates='ratings')
+    ratings: so.WriteOnlyMapped['Review'] = so.relationship( # type: ignore
+        'Review', back_populates='reviews')
     
 
     _table_args__ = (
