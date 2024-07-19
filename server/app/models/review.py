@@ -4,10 +4,18 @@ import sqlalchemy.orm as so
 from typing import Optional
 class Review(db.Model):
     __tablename__ = 'reviews'
-
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
     reviewer: so.Mapped['User'] = so.relationship( # type: ignore
-        'User', back_populates='users')
-    
+        'User', back_populates='reviews')
+    user_id: so.Mapped[int] = so.mapped_column(
+        sa.Integer,sa.ForeignKey('users.id'), 
+        index=True, nullable=False
+    ) 
+    game: so.Mapped['Game'] = so.relationship( # type: ignore
+        'Game', back_populates='reviews' )
+    game_id: so.Mapped[int] = so.mapped_column(
+        sa.Integer, sa.ForeignKey('games.id'), 
+        index=True, nullable=False)
     story_score: so.Mapped[Optional[int]] = so.mapped_column(sa.Integer)
     combat_score: so.Mapped[Optional[int]] = so.mapped_column(sa.Integer)
     voice_acting_score: so.Mapped[Optional[int]] = so.mapped_column(sa.Integer)

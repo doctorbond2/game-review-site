@@ -26,6 +26,8 @@ class Game(db.Model):
     updated_at: so.Mapped[Optional[datetime]] = so.mapped_column(
         sa.DateTime(timezone=True), default=sa.func.now(), onupdate=sa.func.now())
     image_url: so.Mapped[Optional[str]] = so.mapped_column(sa.String(255), default='https://gamefaqs.gamespot.com/a/box/8/1/2/14812_front.jpg')
+    reviews: so.WriteOnlyMapped['Review'] = so.relationship( # type: ignore
+        'Review', back_populates='game')
     __table_args__ = (
         CheckConstraint('release_year >= 1940 AND release_year <= 2024', name='release_year_check'),
         )
