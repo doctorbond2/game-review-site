@@ -1,5 +1,5 @@
 from app import db, app
-from app.models import game, system, user, genre, publisher, association_tables
+from app.models import game, system, user, genre, publisher, review, association_tables
 from app.models.game import Game
 from app.models.system import System
 from app.models.genre import Genre
@@ -35,6 +35,12 @@ def create_sample_data():
     playstation_5 = System( name='PlayStation 5', manufacturer=sony, release_year=2020)
     nes = System(id=1, name='NES', manufacturer=nintendo, release_year=1983)
     larian_studios = Publisher(id=2, name='Larian Studios', founded=1996)
+
+    test_user = User(
+        username='Uberlord_12', 
+        email='uberlord123@hotmail.com')
+    test_user_password = 'Password123!'
+    test_user.set_password(test_user_password )
 
     sample_publishers['Nintendo'].systems = list([nes])
     sample_publishers['Sony'].systems = list([playstation_5])
@@ -92,4 +98,5 @@ def create_sample_data():
     session.add_all(sample_genres.values())
     session.add_all(sample_publishers.values())
     session.add_all(sample_games.values())
+    session.add(test_user)
     session.commit() 

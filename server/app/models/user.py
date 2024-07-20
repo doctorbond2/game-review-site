@@ -9,7 +9,7 @@ class User(db.Model):
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,nullable=False)
     password_hash: so.Mapped[str] = so.mapped_column(sa.String(256))
     reviews: so.WriteOnlyMapped['Review'] = so.relationship( # type: ignore
-        'Review', back_populates='reviews')
+        'Review', back_populates='reviewer')
     
 
     _table_args__ = (
