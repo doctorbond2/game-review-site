@@ -7,10 +7,11 @@ type Props = {
 };
 
 function newGameReview({ params }: Props) {
+  const { gameId } = params;
   return (
     <>
-      <h2 style={{ color: 'red' }}>Posting review for game: {params.gameId}</h2>
-      <ReviewForm />
+      <h2 style={{ color: 'red' }}>Posting review for game: {gameId}</h2>
+      <ReviewForm {...{ gameId }} />
     </>
   );
 }

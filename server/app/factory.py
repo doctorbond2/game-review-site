@@ -58,7 +58,7 @@ def create_sample_data():
         release_year=2020, 
         systems=[nes], 
         publisher=[sample_publishers['Larian Studios']], 
-        genre=[sample_genres['RPG'],sample_genres['Strategy'], sample_genres['Adventure']],
+        genre=[sample_genres['RPG'], sample_genres['Adventure']],
         pc=True, 
         mac=True),
 
