@@ -79,7 +79,7 @@ class Instance {
       throw new Error(e.message);
     }
   };
-  user_post = async (url: string, data: any) => {
+  user_post = async <T>(url: string, data: T) => {
     try {
       const res = await this.user.post(url, data);
       return res;
