@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { clientInstance, adminInstance, userInstance } from './axiosInstance';
-
+const { NEXT_PUBLIC_GAMES_USER_POST_REVIEW } = process.env;
 class Instance {
   constructor() {}
   client = clientInstance;
@@ -79,17 +79,20 @@ class Instance {
       throw new Error(e.message);
     }
   };
-  user_post = async <T>(url: string, data: T) => {
+  user_post = async <T>(data: T) => {
     try {
-      const res = await this.user.post(url, data);
+      const res = await this.user.post(
+        NEXT_PUBLIC_GAMES_USER_POST_REVIEW || '/error',
+        data
+      );
       return res;
     } catch (e: any) {
       throw new Error(e.message);
     }
   };
-  user_put = async (url: string, data: any) => {
+  user_put = async (data: any) => {
     try {
-      const res = await this.user.put(url, data);
+      const res = await this.user.put(data);
       return res;
     } catch (e: any) {
       throw new Error(e.message);

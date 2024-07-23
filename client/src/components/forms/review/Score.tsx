@@ -18,12 +18,12 @@ function Score({ scoreName }: Props) {
       <RadioGroup>
         {scores.map((score, index) => (
           <FormControlLabel
-            key={index + '-score'}
+            key={index + '_score'}
             value={score}
             control={<Radio />}
             label={score}
-            name={scoreName}
-            id={'score-' + scoreName}
+            name={scoreName + '_score'}
+            id={scoreName + '_score'}
           />
         ))}
       </RadioGroup>

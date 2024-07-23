@@ -8,9 +8,13 @@ const SubmitContext = createContext<SC>(defaultSubmitContext);
 function SubmitProvider({ children }: Props) {
   const [submitData, setSubmitData] = useState({});
   const useSubmit = useContext(SubmitContext);
+
+  const resetSubmit = () => setSubmitData({});
   return (
     <>
-      <SubmitContext.Provider value={{ submitData, setSubmitData }}>
+      <SubmitContext.Provider
+        value={{ submitData, setSubmitData, resetSubmit }}
+      >
         {children}
       </SubmitContext.Provider>
     </>
