@@ -8,21 +8,23 @@ import {
   Radio,
 } from '@mui/material';
 import Score from '../Score';
-
-function Action() {
+type Props = {
+  order: number;
+};
+function Action({ order }: Props) {
   return (
     <>
-      <>
+      <li id={'score-radio-' + order.toString()}>
         <h2>Action score</h2>
-        <Score />
+        <Score scoreName="action" />
         <textarea></textarea>
-      </>
+      </li>
 
-      <>
+      <li id={'score-radio-' + (order + 1).toString()}>
         <h2>Combat score</h2>
-        <Score />
+        <Score scoreName="combat" />
         <textarea></textarea>
-      </>
+      </li>
     </>
   );
 }

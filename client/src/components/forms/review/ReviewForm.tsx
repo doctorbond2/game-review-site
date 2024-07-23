@@ -1,38 +1,32 @@
+'use client';
 import React from 'react';
-import { FormControl, FormLabel } from '@mui/material';
-import api from '@/classes/api';
-import endpoints from '@/classes/endpoints';
-import { AxiosResponse } from 'axios';
+import { FormControl, FormLabel, Button } from '@mui/material';
 import ReviewFormList from './ReviewFormList';
-import { retrieveGenres } from '@/utils/formatFromData';
+import { submitForm } from '@/utils/clientFunctions';
 type Props = {
-  gameId: string;
+  genres: string[];
 };
 
-const getData = async (id: string): Promise<AxiosResponse> => {
-  const res = await api.get(endpoints.getOneGame + id);
-  if (res.status !== 200) {
-    throw new Error('Error fetching data');
-  }
-  return res;
-};
-async function ReviewForm({ gameId }: Props) {
-  try {
-    const gameData = await getData(gameId);
-    const genres = retrieveGenres(gameData.data);
-    console.log(genres);
+function ReviewForm({ genres }: Props) {
+  console.log(genres);
 
-    return (
-      <>
+  return (
+    <>
+      <form onSubmit={(e) => submitForm(e)}>
         <FormControl>
           <FormLabel>Game review</FormLabel>
-          <ReviewFormList genres={genres} />
+          <ReviewFormList {...{ genres }} />
+          <Button
+            type={'submit'}
+            id={'review-form-submit-button'}
+            name={'review-form-submit-button'}
+          >
+            Submit form
+          </Button>
         </FormControl>
-      </>
-    );
-  } catch (err) {
-    return <div>Something went wrong</div>;
-  }
+      </form>
+    </>
+  );
 }
 
 export default ReviewForm;

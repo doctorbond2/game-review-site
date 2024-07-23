@@ -7,9 +7,11 @@ import {
   RadioGroup,
   Radio,
 } from '@mui/material';
-type Props = {};
+type Props = {
+  scoreName: string;
+};
 
-function Score({}: Props) {
+function Score({ scoreName }: Props) {
   const scores = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   return (
     <>
@@ -20,6 +22,8 @@ function Score({}: Props) {
             value={score}
             control={<Radio />}
             label={score}
+            name={scoreName}
+            id={'score-' + scoreName}
           />
         ))}
       </RadioGroup>

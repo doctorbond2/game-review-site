@@ -1,7 +1,9 @@
+'use client';
 import React from 'react';
 import Action from './genreForms/Action';
 import Adventure from './genreForms/Adventure';
 import Platformer from './genreForms/Platformer';
+import { Button } from '@mui/material';
 type Props = {
   genres: string[];
 };
@@ -12,21 +14,21 @@ function ReviewFormList({ genres }: Props) {
       if (genre === 'Action') {
         return (
           <>
-            <Action />
+            <Action order={index + 1} />
           </>
         );
       }
       if (genre === 'Adventure') {
         return (
           <>
-            <Adventure />
+            <Adventure order={index + 1} />
           </>
         );
       }
       if (genre === 'Platformer') {
         return (
           <>
-            <Platformer />
+            <Platformer order={index + 1} />
           </>
         );
       }
