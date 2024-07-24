@@ -11,3 +11,7 @@ class Game_ENV:
     get_one_game_by_id = os.getenv('GAME_GET_ONE_BY_ID')
     get_one_game_by_name = os.getenv('GAME_GET_ONE_BY_NAME')
     get_one_game_details = os.getenv('GAME_GET_ONE_DETAILS')
+
+class Review_ENV:
+    base_url= os.getenv('REVIEW_BASE_URL')
+    post_one_review = os.getenv('REVIEW_USER_POST_ONE')
