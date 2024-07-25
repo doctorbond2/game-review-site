@@ -17,5 +17,6 @@ login = LoginManager(app)
 from app.routes import blueprints
 
 app.register_blueprint(blueprints.game_bp)
+app.register_blueprint(blueprints.review_bp)
 CORS(app)
 from app import routes, models, controllers, factory
