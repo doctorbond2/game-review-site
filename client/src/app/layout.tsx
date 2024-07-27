@@ -6,6 +6,8 @@ import SubmitProvider from '../context/SubmitContext';
 import './globals.css';
 import Footer from '@/components/nav/footer/Footer';
 import Header from '@/components/nav/header/Header';
+import { Container } from '@mui/material';
+import { body_container_props } from '@/mui_props/box';
 export default function RootLayout({
   children,
 }: {
@@ -16,8 +18,7 @@ export default function RootLayout({
       <SubmitProvider>
         <body style={{ paddingTop: '50px', paddingBottom: '100px' }}>
           <Header />
-
-          {children}
+          <Container sx={body_container_props}>{children}</Container>
           <Footer />
         </body>
       </SubmitProvider>

@@ -47,3 +47,7 @@ export const header_box_props = {
   height: '6vh',
   borderBottom: 1,
 };
+export const body_container_props = {
+  backgroundColor: 'red',
+  height: '100%',
+};

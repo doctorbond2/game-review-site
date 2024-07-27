@@ -7,6 +7,9 @@ class Library {
   goToGame = (gameId: string) => {
     return `${this.BaseUrl + this.LibraryUrl + this.GamesUrl + gameId}`;
   };
+  goToLibraryHome = () => {
+    return `${this.BaseUrl + this.LibraryUrl}`;
+  };
 }
 
 const library = new Library();

@@ -79,12 +79,9 @@ class Instance {
       throw new Error(e.message);
     }
   };
-  user_post = async <T>(data: T) => {
+  user_post = async <T>(url: string, data: T) => {
     try {
-      const res = await this.user.post(
-        process.env.NEXT_PUBLIC_GAMES_USER_POST_REVIEW || '/error',
-        data
-      );
+      const res = await this.user.post(url, data);
       return res;
     } catch (e: any) {
       throw new Error(e.message);

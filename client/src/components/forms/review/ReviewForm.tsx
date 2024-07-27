@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormControl, FormLabel, Button } from '@mui/material';
 import ReviewFormList from './ReviewFormList';
-import { submitForm } from '@/utils/clientFunctions';
+import { submitReviewForm } from '@/utils/clientFunctions';
 type Props = {
   genres: string[];
 };
@@ -12,7 +12,7 @@ function ReviewForm({ genres }: Props) {
 
   return (
     <>
-      <form onSubmit={(e) => submitForm(e)}>
+      <form onSubmit={(e) => submitReviewForm(e)}>
         <FormControl>
           <FormLabel>Game review</FormLabel>
           <ReviewFormList {...{ genres }} />
