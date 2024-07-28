@@ -31,4 +31,5 @@ class Review(db.Model):
             'final_score >= 1 AND final_score <= 10',
             name='final_score_range_check'
         ),
+        
     )

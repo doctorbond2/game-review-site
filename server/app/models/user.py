@@ -1,8 +1,9 @@
 from app import db
 import sqlalchemy as sa
 import sqlalchemy.orm as so
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
-class User(db.Model):
+class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, nullable=False)
