@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from ..models.user import User
 from .. import db
-
+from sqlalchemy import or_
 
 def user_data_receiver():
     data = request.get_json()
@@ -32,5 +32,32 @@ def add_user():
 
 def login_user():
     data = user_data_receiver()
+    session = db.session()
+    
+    try:
+        if not data.get('username') and  not data.get('email'):
+            return jsonify({'message': 'User not found'}),404
+        
+        user = session.query(User).filter(
+            or_(
+                User.username == data.get('username'),
+                User.email == data.get('email')
+            )
+        ).first()
+        
+        if not user:
+            return jsonify({'message': 'User not found'}), 404
+        
+        if user.check_password(user,data.get('password')):
+            return user
+        
+        else:
+            return jsonify({"message": "Invalid password"}),401
+        
+    except Exception as e:
+        session.rollback()
+        return jsonify({'message': 'Something went wrang'}),500
+    finally:
+        session.close()
 def update_user():
     return 'poop'

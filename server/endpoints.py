@@ -15,3 +15,9 @@ class Game_ENV:
 class Review_ENV:
     base_url= os.getenv('REVIEW_BASE_URL')
     post_one_review = os.getenv('REVIEW_USER_POST_ONE')
+
+class User_ENV:
+    base_url = os.getenv('USER_BASE_URL')
+    auth_base_url = os.getenv('USER_AUTH_BASE_URL')
+    post_login_user = os.getenv('USER_AUTH_LOGIN')
+    put_update_password = os.getenv('USER_AUTH_UPDATE_PASSWORD')
