@@ -8,4 +8,5 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SERVER_NAME = os.environ.get('SERVER_NAME') or '127.0.0.1:5050'
+    JWT_SECRET_KEY = 'absolut!xd'
 
