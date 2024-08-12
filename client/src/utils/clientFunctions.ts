@@ -14,3 +14,7 @@ export const submitReviewForm = async (e: React.FormEvent<HTMLFormElement>) => {
   }
   console.log(data);
 };
+export function isEmail(email: string) {
+  const pattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+  return pattern.test(email);
+}
