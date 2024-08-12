@@ -32,6 +32,20 @@ class User(UserMixin,db.Model):
     def check_password(self,password):
         return check_password_hash(self.password_hash, password)
 
-   
+    def to_dict(self):
+        return {
+            "username": self.username,
+            "email": self.email
+            
+        }
+    def to_dict_with_reviews(self,session):
+        from .review import Review
+        reviews = session.query(Review).filter(Review.user_id == self.id).all()
+        return {
+            "username": self.username,
+            "email": self.email,
+            "reviews": [review.to_dict() for review in reviews]
+        }
+
     def __repr__(self):
         return '<User {}>'.format(self.username)

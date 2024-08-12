@@ -19,5 +19,9 @@ class Review_ENV:
 class User_ENV:
     base_url = os.getenv('USER_BASE_URL')
     auth_base_url = os.getenv('USER_AUTH_BASE_URL')
+
     post_login_user = os.getenv('USER_AUTH_LOGIN')
+
     put_update_password = os.getenv('USER_AUTH_UPDATE_PASSWORD')
+    
+    get_profule = os.getenv('USER_GET_PROFILE')

@@ -7,3 +7,4 @@ class Endpoint {
 }
 const endpoints = new Endpoint();
 export default endpoints;
+  

@@ -26,6 +26,32 @@ class Review(db.Model):
     characters_score: so.Mapped[Optional[int]] = so.mapped_column(sa.Integer)
     final_score: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
 
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'reviewer_id': self.user_id,
+            'game_id': self.game_id,
+            'final_score': self.final_score,
+        }
+        if self.story_score is not None:
+            data['story_score'] = self.story_score
+        if self.combat_score is not None:
+            data['combat_score'] = self.combat_score
+        if self.voice_acting_score is not None:
+            data['voice_acting_score'] = self.voice_acting_score
+        if self.open_world_score is not None:
+            data['open_world_score'] = self.open_world_score
+        if self.weapons_score is not None:
+            data['weapons_score'] = self.weapons_score
+        if self.level_score is not None:
+            data['level_score'] = self.level_score
+        if self.combat_score is not None:
+            data['combat_score'] = self.combat_score
+        if self.characters_score is not None:
+            data['characters_score'] = self.characters_score
+
+        return data
+    
     __table_args__ = (
          sa.CheckConstraint( 
             'final_score >= 1 AND final_score <= 10',

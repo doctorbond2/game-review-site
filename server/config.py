@@ -1,4 +1,5 @@
 import os
+import datetime  
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,4 +10,6 @@ class Config:
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SERVER_NAME = os.environ.get('SERVER_NAME') or '127.0.0.1:5050'
     JWT_SECRET_KEY = 'absolut!xd'
+    JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=15)  
+    JWT_REFRESH_TOKEN_EXPIRES = datetime.timedelta(days=30)
 
