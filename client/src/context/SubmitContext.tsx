@@ -1,10 +1,13 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
-import { TYPE_SubmitContext as SC } from '@/types/types_submit';
+import {
+  TYPE_SubmitContext as SC,
+  TYPE_PasswordChangeData,
+  TYPE_RegisterData,
+} from '@/types/types_submit';
 import { defaultSubmitContext } from '@/types/default_submit';
 import { isEmail } from '@/utils/clientFunctions';
-import { log } from 'console';
-import { TYPE_loginData } from '@/types/types_submit';
+import { TYPE_SubmitData, TYPE_LoginData } from '@/types/types_submit';
 type Props = { children: React.ReactNode };
 
 const SubmitContext = createContext<SC>(defaultSubmitContext);
@@ -22,19 +25,37 @@ function SubmitProvider({ children }: Props) {
 
   const resetSubmit = () => setSubmitData({});
 
-  const submit = (data: TYPE_loginData, type: string) => {
+  const submit = <T extends keyof TYPE_SubmitData>(
+    data: TYPE_SubmitData[T],
+    type: T
+  ) => {
     if (type === 'login') {
-      if (isEmail(data['user-login-username-or-email'] as string)) {
-        data['email'] = data['user-login-username-or-email'];
-        delete data['user-login-username-or-email'];
+      const loginData = data as TYPE_LoginData;
+      if (isEmail(loginData['user-login-username-or-email'] as string)) {
+        loginData['email'] = loginData['user-login-username-or-email'];
+        delete loginData['user-login-username-or-email'];
         console.log('Email');
       } else {
-        data['username'] = data['user-login-username-or-email'];
-        delete data['user-login-username-or-email'];
+        loginData['username'] = loginData['user-login-username-or-email'];
+        delete loginData['user-login-username-or-email'];
         console.log('Username');
       }
     }
+    if (type == 'register') {
+      const registerData = data as TYPE_RegisterData;
+      if (isEmail(registerData.email)) {
+        console.log('ok');
+      }
+      if (type == 'password_change') {
+        const passwordChangeData = data as TYPE_PasswordChangeData;
+      }
+    }
   };
+  // const submission = <InputData, ParsedData>(
+  //   data: InputData
+  // ): ParsedData | null => {
+  //   return null;
+  // };
 
   return (
     <SubmitContext.Provider
