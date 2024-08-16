@@ -2,7 +2,10 @@ export type TYPE_SubmitContext = {
   setSubmitData: any;
   submitData: any;
   resetSubmit: () => void;
-  submit: (data: Record<string, any>, type: string) => void;
+  submit: <T extends keyof TYPE_SubmitData>(
+    data: TYPE_SubmitData[T],
+    type: T
+  ) => void;
 };
 export type TYPE_LoginData = {
   password?: string;

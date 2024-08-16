@@ -5,12 +5,19 @@ import {
   TYPE_PasswordChangeData,
   TYPE_RegisterData,
 } from '@/types/types_submit';
-import { defaultSubmitContext } from '@/types/default_submit';
 import { isEmail } from '@/utils/clientFunctions';
 import { TYPE_SubmitData, TYPE_LoginData } from '@/types/types_submit';
 type Props = { children: React.ReactNode };
 
-const SubmitContext = createContext<SC>(defaultSubmitContext);
+const SubmitContext = createContext<SC>({
+  submitData: null,
+  setSubmitData: {},
+  resetSubmit: () => {},
+  submit: <T extends keyof TYPE_SubmitData>(
+    data: TYPE_SubmitData[T],
+    type: T
+  ) => {},
+});
 
 export function useSubmit() {
   const context = useContext(SubmitContext);

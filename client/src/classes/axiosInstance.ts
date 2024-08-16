@@ -1,6 +1,6 @@
 import axios from 'axios';
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-export const clientInstance = axios.create({
+const clientInstance = axios.create({
   baseURL,
   timeout: 1000,
   headers: {
@@ -8,7 +8,7 @@ export const clientInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
-export const adminInstance = axios.create({
+const adminInstance = axios.create({
   baseURL,
   timeout: 1000,
   headers: {
@@ -16,7 +16,7 @@ export const adminInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
-export const userInstance = axios.create({
+const userInstance = axios.create({
   baseURL,
   timeout: 1000,
   headers: {
@@ -24,3 +24,12 @@ export const userInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+userInstance.interceptors.request.use();
+userInstance.interceptors.response.use();
+
+adminInstance.interceptors.request.use();
+adminInstance.interceptors.response.use();
+
+clientInstance.interceptors.request.use();
+clientInstance.interceptors.response.use();
+export { clientInstance, adminInstance, userInstance };
