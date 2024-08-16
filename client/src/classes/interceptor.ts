@@ -1,17 +1,21 @@
 import { AxiosInstance } from 'axios';
 import { userInstance } from './axiosInstance';
 import { access } from 'fs';
-
-class Interceptor<T> {
-  config: any;
+import LocalStorage from './localstorage';
+export default class Interceptor<T> {
+  config: {
+    headers: {};
+  };
   constructor(instance: T) {
+    this.config = {
+      headers: {},
+    };
     if (instance === 'user') {
       this.config = {
-        accessToken: '',
-        refreshToken: '',
+        headers: {
+          Authorization: `Bearer ${LocalStorage.getItem('token')}`,
+        },
       };
     }
   }
 }
-const userInterceptor = new Interceptor('user');
-export { userInterceptor };
